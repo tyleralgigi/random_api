@@ -1,19 +1,24 @@
 from flask import Flask, jsonify
 from random import choice, randint
+import os
 import json
 
 # Initialize the Flask app
 app = Flask(__name__)
 
 # Sample prompts for crimes and work (replace with your full dataset)
-f = open('data\simulation_crime_prompts.json')
+prompts_file = os.path.abspath(os.path.dirname(__file__)) + '/data/simulation_crime_prompts.json'
+f = open(prompts_file)
 # returns JSON object as a dictionary
 crime_prompts = json.load(f)
 f.close()
-f = open('data\simulation_work_prompts.json')
+
+prompts_file = os.path.abspath(os.path.dirname(__file__)) + '/data/simulation_work_prompts.json'
+f = open(prompts_file)
 # returns JSON object as a dictionary
 work_prompts = json.load(f)
 f.close()
+
 
 # Route for getting a random crime prompt
 @app.route('/random_crime', methods=['GET'])
